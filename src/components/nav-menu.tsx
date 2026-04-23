@@ -56,7 +56,7 @@ export function NavMenu() {
                   asChild
                   className={cn(
                     navigationMenuTriggerStyle(),
-                    'text-md font-serif scale-x-[1.1] origin-left',
+                    'text-md font-serif scale-x-[1.1] origin-left'
                     // isActive &&
                     // 'bg-foreground text-background hover:bg-foreground/90 focus:bg-foreground/90 scale-x-[1.2]'
                   )}
@@ -68,6 +68,6 @@ export function NavMenu() {
           })}
         </NavigationMenuList>
       </NavigationMenu>
-    </NoiseBackground >
+    </NoiseBackground>
   );
 }

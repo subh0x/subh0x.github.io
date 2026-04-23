@@ -84,7 +84,7 @@ export default function Home() {
             {EXPERIENCE.map((job, i) => (
               <div key={i} className="group">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-zinc-100 text-xl font-serif">
+                  <span className="text-zinc-100 text-xl font-serif scale-x-[1.2] pl-2">
                     {job.company}
                   </span>
                   <Image
