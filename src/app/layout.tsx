@@ -54,7 +54,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="max-w-[680px] mx-auto flex flex-col items-start pt-5">
+          <div className="max-w-170 mx-auto flex flex-col items-start pt-5">
             <NavMenu />
           </div>
           {children}

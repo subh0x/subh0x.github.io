@@ -33,13 +33,13 @@ const ExternalLinkIcon = () => {
       />
     </svg>
   );
-}
+};
 
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center dark:bg-background text-foreground">
-      <div className="max-w-[680px] mx-auto px-5 pt-10 flex flex-col gap-4">
-        <div className="px-2 pb-6">
+      <div className="max-w-170 mx-auto px-5 pt-10 flex flex-col gap-4">
+        {/* <div className="px-2 pb-6">
           <Link
             href="/"
             className="rounded-(--radius) mx-auto flex w-fit items-center gap-2 border p-1 pr-3"
@@ -52,11 +52,22 @@ export default function Home() {
 
             <ArrowRight className="size-4" />
           </Link>
-        </div>
+        </div> */}
         <div className="px-2 flex flex-col items-start">
-          <h1 className="text-3xl font-serif tracking-tight bg-gradient-to-r from-zinc-100 via-blue-400 to-zinc-400 bg-clip-text text-transparent">
-            Subhrajit Guchait
-          </h1>
+          <div className="flex flex-row items-center justify-center w-full gap-4 pb-6">
+            <div>
+              <Image
+                src="/subhrajit-guchait-2.jpeg"
+                alt={'Subhrajit Guchait'}
+                className="rounded-xl object-cover"
+                width={60}
+                height={60}
+              />
+            </div>
+            <h1 className="text-4xl font-serif tracking-tight bg-linear-to-r from-zinc-100 via-blue-400 to-zinc-400 bg-clip-text text-transparent [-webkit-text-fill-color:transparent]">
+              Subhrajit Guchait
+            </h1>
+          </div>
           <h3 className="text-[15px] text-zinc-400 leading-relaxed">
             I'm a Full Stack Developer from Kolkata, India, with 3+ years of
             professional experience in Application Developement and Integration
@@ -83,7 +94,7 @@ export default function Home() {
           <div className="space-y-7">
             {EXPERIENCE.map((job, i) => (
               <div key={i} className="group">
-                <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center justify-between gap-2 pb-2">
                   <span className="text-zinc-100 text-xl font-serif scale-x-[1.2] pl-2">
                     {job.company}
                   </span>
@@ -176,7 +187,6 @@ export default function Home() {
               {[
                 { label: 'Email', href: `mailto:${META.email}` },
                 { label: 'GitHub', href: LINKS.github },
-                // { label: 'Twitter', href: LINKS.twitter },
                 { label: 'LinkedIn', href: LINKS.linkedin },
               ].map(({ label, href }) => (
                 <a
