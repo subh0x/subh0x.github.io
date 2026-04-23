@@ -24,13 +24,19 @@ const EXPERIENCE = [
     description:
       'Leading engineering for a suite of SaaS products. Built the full infrastructure from zero to paying customers.',
     tags: [
+      'Excel',
+      'Powerpoint',
       '.NET',
       'C#',
+      'Javascript',
       'Typescript',
       'OfficeJS',
+      'React',
       'Python',
       'FastAPI',
+      'AI Engineering',
       'Postgres',
+      'Azure',
     ],
   },
 ];
