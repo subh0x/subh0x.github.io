@@ -93,7 +93,7 @@ export default function Home() {
         </div>
         {/* HERO Section */}
         <div className="flex flex-col items-start">
-          <h1 className="text-2xl font-semibold tracking-tight text-zinc-200">
+          <h1 className="text-2xl font-serif tracking-tight text-zinc-200">
             Subhrajit Guchait
           </h1>
           <h3 className='text-[15px] text-zinc-400 leading-relaxed'>
@@ -127,7 +127,7 @@ export default function Home() {
           {EXPERIENCE.map((job, i) => (
             <div key={i} className="group">
               <Image
-                src="/PwC_Company_Logo.svg"
+                src="/pwc-logo.svg"
                 alt="PwC logo"
                 width={90}
                 height={36}
