@@ -16,7 +16,7 @@ const LINKS = {
   resume: '#',
 };
 
-function ExternalLinkIcon() {
+const ExternalLinkIcon = () => {
   return (
     <svg
       width="12"
@@ -38,8 +38,8 @@ function ExternalLinkIcon() {
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center dark:bg-background text-foreground">
-      <div className="max-w-[680px] mx-auto px-5 py-10 flex flex-col gap-4">
-        <div className="pb-6">
+      <div className="max-w-[680px] mx-auto px-5 pt-10 flex flex-col gap-4">
+        <div className="px-2 pb-6">
           <Link
             href="/"
             className="rounded-(--radius) mx-auto flex w-fit items-center gap-2 border p-1 pr-3"
@@ -53,8 +53,8 @@ export default function Home() {
             <ArrowRight className="size-4" />
           </Link>
         </div>
-        <div className="flex flex-col items-start">
-          <h1 className="text-3xl font-serif tracking-tight text-zinc-200">
+        <div className="px-2 flex flex-col items-start">
+          <h1 className="text-3xl font-serif tracking-tight bg-gradient-to-r from-zinc-100 via-blue-400 to-zinc-400 bg-clip-text text-transparent">
             Subhrajit Guchait
           </h1>
           <h3 className="text-[15px] text-zinc-400 leading-relaxed">
@@ -64,7 +64,7 @@ export default function Home() {
           </h3>
         </div>
         <Separator />
-        <div>
+        <div className="px-2">
           <h2 className="text-[11px] font-semibold text-zinc-100 uppercase tracking-widest mb-5">
             Professional Work
           </h2>
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
 
         <Separator />
-        <div>
+        <div className="px-2">
           <h2 className="text-base font-semibold text-zinc-100 uppercase tracking-widest text-[11px] mb-6">
             Experience
           </h2>
@@ -128,7 +128,7 @@ export default function Home() {
           </a> */}
         </div>
         <Separator />
-        <div>
+        <div className="px-2">
           <h2 className="text-[11px] font-semibold text-zinc-100 uppercase tracking-widest mb-4">
             What Makes Me Different
           </h2>
@@ -143,13 +143,13 @@ export default function Home() {
               While I embrace AI-assisted development, I do it differently. I
               leverage AI to build powerful systems faster, but always with
               proper supervision, code review, and architectural oversight.
-              Quality and productivity—the best of both worlds.
+              Quality and productivity, the best of both worlds.
             </p>
           </div>
         </div>
 
         <Separator />
-        <div>
+        <div className="px-2">
           <h2 className="text-[11px] font-semibold text-zinc-100 uppercase tracking-widest mb-5">
             Writing
           </h2>
@@ -163,12 +163,12 @@ export default function Home() {
         </div>
 
         <Separator />
-        <div className="relative max-sm:mb-6">
+        <div className="px-2 relative max-sm:mb-6">
           <div
             aria-hidden
-            className="absolute inset-0 [background:radial-gradient(125%_125%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]"
+            className="pointer-events-none absolute inset-0 [background:radial-gradient(125%_115%_at_50%_0%,transparent_40%,var(--color-blue-600),var(--color-white)_100%)]"
           />
-          <div className="aspect-120/40 p-1 px-6">
+          <div className="aspect-120/40">
             <h2 className="text-[11px] font-semibold text-zinc-100 uppercase tracking-widest mb-5">
               Let's Get in Touch
             </h2>
@@ -184,7 +184,7 @@ export default function Home() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-zinc-100 transition-colors"
+                  className="inline-flex items-center hover:text-zinc-100 transition-colors"
                 >
                   {label} <ExternalLinkIcon />
                 </a>
