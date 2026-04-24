@@ -74,8 +74,8 @@ export default function Home() {
             in React, .NET & Python.
           </h3>
         </div>
-        <Separator />
-        <div className="px-2">
+        {/* <Separator /> */}
+        {/* <div className="px-2">
           <h2 className="text-[11px] font-semibold text-zinc-100 uppercase tracking-widest mb-5">
             Professional Work
           </h2>
@@ -84,7 +84,7 @@ export default function Home() {
             suite and OfficeJS Web Add-ins. Recently I have been working on
             Integrating OfficeJS add-ins with AI Tools.
           </div>
-        </div>
+        </div> */}
 
         <Separator />
         <div className="px-2">
