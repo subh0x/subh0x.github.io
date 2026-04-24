@@ -1,10 +1,12 @@
 'use-client';
-import { ArrowRight } from 'lucide-react';
+import { Search } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Separator } from '@/components/ui/separator';
 import { EXPERIENCE } from '@/constants/experience';
 import ReactMarkdown from 'react-markdown';
+import { Kbd } from '@/components/ui/kbd';
+import ActionSearchBar from '@/components/action-search-bar';
 
 const META = {
   email: 'subhrajitguchait20@gmail.com',
@@ -38,20 +40,21 @@ const ExternalLinkIcon = () => {
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center dark:bg-background text-foreground">
-      <div className="max-w-170 mx-auto px-5 pt-10 flex flex-col gap-4">
+      <div className="max-w-170 mx-auto px-5 pt-6 flex flex-col gap-4">
         {/* <div className="px-2 pb-6">
           <Link
             href="/"
             className="rounded-(--radius) mx-auto flex w-fit items-center gap-2 border p-1 pr-3"
           >
             <span className="bg-muted rounded-[calc(var(--radius)-0.25rem)] px-2 py-1 text-xs">
-              New
+              <Kbd>⌘ + K</Kbd>
             </span>
             <span className="text-sm">Personal Portfolio</span>
             <span className="bg-(--color-border) block h-4 w-px"></span>
 
-            <ArrowRight className="size-4" />
-          </Link>
+            <Search className="size-4" />
+          </Link> 
+          <ActionSearchBar />
         </div> */}
         <div className="px-2 flex flex-col items-start">
           <div className="flex flex-row items-center justify-center w-full gap-4 pb-6">

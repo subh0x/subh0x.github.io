@@ -57,9 +57,9 @@ export const NoiseBackground = ({
   className,
   containerClassName,
   gradientColors = [
-    'rgb(255, 100, 150)',
+    'rgb(159, 193, 255)',
     'rgb(100, 150, 255)',
-    'rgb(255, 200, 100)',
+    'rgb(43, 67, 207)',
   ],
   noiseIntensity = 0.2,
   speed = 0.1,

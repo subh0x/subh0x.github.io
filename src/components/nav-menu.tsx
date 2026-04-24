@@ -40,11 +40,6 @@ export function NavMenu() {
       <NoiseBackground
         containerClassName="w-fit rounded-md p-1"
         className="rounded-md bg-background p-1"
-        gradientColors={[
-          'rgb(159, 193, 255)',
-          'rgb(100, 150, 255)',
-          'rgb(43, 67, 207)',
-        ]}
       >
         <NavigationMenu>
           <NavigationMenuList className="gap-4">
