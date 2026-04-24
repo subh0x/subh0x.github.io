@@ -173,7 +173,7 @@ export const NoiseBackground = ({
         'shadow-[0px_0.5px_1px_0px_var(--color-neutral-400)_inset,0px_1px_0px_0px_var(--color-neutral-100)]',
         'dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]',
         backdropBlur &&
-        "after:absolute after:inset-0 after:h-full after:w-full after:backdrop-blur-lg after:content-['']",
+          "after:absolute after:inset-0 after:h-full after:w-full after:backdrop-blur-lg after:content-['']",
         containerClassName
       )}
       style={
