@@ -57,9 +57,9 @@ export const NoiseBackground = ({
   className,
   containerClassName,
   gradientColors = [
-    'rgb(255, 100, 150)',
+    'rgb(159, 193, 255)',
     'rgb(100, 150, 255)',
-    'rgb(255, 200, 100)',
+    'rgb(43, 67, 207)',
   ],
   noiseIntensity = 0.2,
   speed = 0.1,
@@ -173,7 +173,7 @@ export const NoiseBackground = ({
         'shadow-[0px_0.5px_1px_0px_var(--color-neutral-400)_inset,0px_1px_0px_0px_var(--color-neutral-100)]',
         'dark:shadow-[0px_1px_0px_0px_var(--color-neutral-950)_inset,0px_1px_0px_0px_var(--color-neutral-800)]',
         backdropBlur &&
-          "after:absolute after:inset-0 after:h-full after:w-full after:backdrop-blur-lg after:content-['']",
+        "after:absolute after:inset-0 after:h-full after:w-full after:backdrop-blur-lg after:content-['']",
         containerClassName
       )}
       style={
