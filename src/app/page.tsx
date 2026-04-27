@@ -72,7 +72,7 @@ export default function Home() {
             </h1>
           </div>
           <h3 className="text-[15px] text-zinc-400 leading-relaxed">
-            I'm a Full Stack Developer from Kolkata, India, with 3+ years of
+            I'm a Full Stack Developer from Kolkata, India, with ~3 years of
             professional experience in Application Developement and Integration
             in React, .NET & Python.
           </h3>
