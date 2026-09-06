@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Send, PlaneTakeoff, SquareDashedText } from 'lucide-react';
 import {
@@ -53,9 +53,7 @@ const allActions = [
 
 function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
   const [query, setQuery] = useState('');
-  const [result, setResult] = useState<SearchResult | null>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
   const [selectedAction, setSelectedAction] = useState<Action | null>(null);
   const debouncedQuery = useDebounce(query, 200);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -87,29 +85,20 @@ function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isFocused]);
 
-  useEffect(() => {
-    if (!isFocused) {
-      setResult(null);
-      return;
-    }
-
-    if (!debouncedQuery) {
-      setResult({ actions: allActions });
-      return;
-    }
+  const result = useMemo<SearchResult | null>(() => {
+    if (!isFocused) return null;
+    if (!debouncedQuery) return { actions };
 
     const normalizedQuery = debouncedQuery.toLowerCase().trim();
-    const filteredActions = allActions.filter((action) => {
-      const searchableText = action.label.toLowerCase();
-      return searchableText.includes(normalizedQuery);
-    });
-
-    setResult({ actions: filteredActions });
-  }, [debouncedQuery, isFocused]);
+    return {
+      actions: actions.filter((action) =>
+        action.label.toLowerCase().includes(normalizedQuery)
+      ),
+    };
+  }, [actions, debouncedQuery, isFocused]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
-    setIsTyping(true);
   };
 
   const container = {

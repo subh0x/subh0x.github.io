@@ -1,21 +1,11 @@
 import { ThemeProvider } from '@/components/theme-provider';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Instrument_Serif, Inter } from 'next/font/google';
+import { Instrument_Serif, Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { NavMenu } from '@/components/nav-menu';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 const instrumentSerif = Instrument_Serif({
   variable: '--font-instrument-serif',
@@ -39,8 +29,6 @@ export default function RootLayout({
       className={cn(
         'h-full',
         'antialiased',
-        geistSans.variable,
-        geistMono.variable,
         instrumentSerif.variable,
         'font-sans',
         inter.variable

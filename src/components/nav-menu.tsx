@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
 import {
   NavigationMenu,
@@ -19,22 +18,12 @@ const NAVMENU = [
     link: '/',
   },
   {
-    label: 'Projects',
-    link: '/#',
-  },
-  {
-    label: 'Resume',
-    link: '/#',
-  },
-  {
     label: 'Blog',
-    link: '/#',
+    link: '/blog',
   },
 ];
 
 export function NavMenu() {
-  const pathname = usePathname();
-
   return (
     <div className="flex flex-row items-center justify-around">
       <NoiseBackground

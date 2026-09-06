@@ -18,7 +18,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load `Inter` and `Instrument Serif`.
+
+## Blog
+
+Posts live as Markdown files in `content/blog/<slug>.md` with YAML frontmatter (`title`, `date`, `excerpt`, `tags`, optional `cover`). `src/lib/blog.ts` reads them at build time; `src/app/blog/[slug]/page.tsx` statically generates one page per post via `generateStaticParams()`.
+
+Post images go in `public/blog/<slug>/` and are referenced by absolute path (e.g. `/blog/<slug>/diagram.png`) from the Markdown body.
+
+**Image weight convention**: this site is statically exported with `images.unoptimized: true`, so Next does not resize or convert images at build or request time — whatever file is committed is exactly what ships. Resize and compress images before committing, e.g.:
+
+```bash
+sips -Z 1200 -s formatOptions 80 original.jpg --out public/blog/<slug>/cover.jpg
+```
+
+Keep post images under ~150KB where possible.
 
 ## Learn More
 
