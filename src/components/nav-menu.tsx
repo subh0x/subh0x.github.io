@@ -28,7 +28,7 @@ export function NavMenu() {
     <div className="flex flex-row items-center justify-around">
       <NoiseBackground
         containerClassName="w-fit rounded-md p-1"
-        className="rounded-md bg-background p-1"
+        className="rounded-md bg-background p-1.5"
       >
         <NavigationMenu>
           <NavigationMenuList className="gap-4">
@@ -39,7 +39,7 @@ export function NavMenu() {
                     asChild
                     className={cn(
                       navigationMenuTriggerStyle(),
-                      'text-md font-serif scale-x-[1.1] origin-left'
+                      'text-md font-serif scale-x-[1.1] origin-center'
                     )}
                   >
                     <Link href={NavItem.link}>{NavItem.label}</Link>
