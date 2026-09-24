@@ -1,3 +1,5 @@
+import SiteStatus from './components/ui/SiteStatus';
+
 export default function App() {
   return (
     <div className="flex flex-col gap-6 mx-auto max-w-[582px] px-4 md:pt-20 pt-8 pb-10">
@@ -8,10 +10,8 @@ export default function App() {
           </h1>
           <h3 className="text-sm text-foreground opacity-40">@subh0x</h3>
         </div>
+        <SiteStatus />
         <div className="flex flex-col gap-4 text-sm leading-6 font-[450]">
-          <p>
-            I work in AI Application Development for Improving Workflows, at PwC India.
-          </p>
           <p>
             You can reach me at{' '}
             <a
