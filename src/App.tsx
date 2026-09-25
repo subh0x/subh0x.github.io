@@ -1,29 +1,47 @@
-import SiteStatus from './components/ui/SiteStatus';
+import { useEffect, useState } from 'react';
+import { areas, type AreaId } from './content';
+import { useHashRoute } from './useHashRoute';
+import MobileNav from './components/MobileNav';
+import PaperFilters from './components/PaperFilters';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import MapPage from './pages/MapPage';
+import Projects from './pages/Projects';
+import Skills from './pages/Skills';
+
+const pages = {
+  about: About,
+  skills: Skills,
+  projects: Projects,
+  contact: Contact,
+};
 
 export default function App() {
+  const route = useHashRoute();
+  const area = areas.find((a) => a.id === route);
+
+  // Places visited this session drive the map's "Today's quest" progress.
+  const [visited, setVisited] = useState<ReadonlySet<AreaId>>(new Set());
+  if (area && !visited.has(area.id)) setVisited(new Set(visited).add(area.id));
+
+  useEffect(() => {
+    document.title = area
+      ? `${area.place} · Subhrajit Guchait`
+      : 'Subhrajit Guchait';
+    window.scrollTo(0, 0);
+  }, [area]);
+
+  const Page = area && pages[area.id];
+
   return (
-    <div className="flex flex-col gap-6 mx-auto max-w-[582px] px-4 md:pt-20 pt-8 pb-10">
-      <article className="flex flex-col gap-6">
-        <div className="flex flex-col gap-0.5">
-          <h1 className="text-[15px] font-medium text-foreground">
-            Subhrajit Guchait
-          </h1>
-          <h3 className="text-sm text-foreground opacity-40">@subh0x</h3>
-        </div>
-        <SiteStatus />
-        <div className="flex flex-col gap-4 text-sm leading-6 font-[450]">
-          <p>
-            You can reach me at{' '}
-            <a
-              target="_self"
-              className="inline-flex gap-0.5 items-center cursor-pointer text-indigo-500 hover:text-indigo-400"
-              href="mailto:subhrajitguchait20@gmail.com"
-            >
-              subhrajitguchait20@gmail.com
-            </a>
-          </p>
-        </div>
-      </article>
-    </div>
+    <>
+      <PaperFilters />
+      {Page ? (
+        <Page key={area.id} area={area} />
+      ) : (
+        <MapPage visited={visited} />
+      )}
+      <MobileNav route={route} />
+    </>
   );
 }

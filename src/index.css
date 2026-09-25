@@ -1,14 +1,384 @@
 @import 'tailwindcss';
 
 @theme {
-  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --font-display: 'Lilita One', cursive;
+  --font-hand: 'Patrick Hand', cursive;
 
-  @keyframes shimmer {
-    from {
-      transform: translateX(-100%);
-    }
-    to {
-      transform: translateX(300%);
-    }
+  /* Papercraft "Meadow" palette */
+  --color-paper: #f7f0dd;
+  --color-ink: #3b2314;
+  --color-primary: #ee6b3b;
+  --color-accent: #f4b43a;
+  --color-success: #8dc153;
+  --color-info: #3aa2a4;
+  --color-wood: #9a5f36;
+
+  /* Derived shades, same ratios as the design's mix() helper */
+  --color-paperalt: color-mix(
+    in srgb,
+    var(--color-paper),
+    var(--color-accent) 22%
+  );
+  --color-edge: color-mix(in srgb, var(--color-paper), var(--color-accent) 55%);
+  --color-inksoft: color-mix(in srgb, var(--color-ink), var(--color-paper) 32%);
+  --color-primarydeep: color-mix(
+    in srgb,
+    var(--color-primary),
+    var(--color-ink) 55%
+  );
+  --color-accentdeep: color-mix(
+    in srgb,
+    var(--color-accent),
+    var(--color-ink) 55%
+  );
+  --color-successdeep: color-mix(
+    in srgb,
+    var(--color-success),
+    var(--color-ink) 55%
+  );
+  --color-infodeep: color-mix(in srgb, var(--color-info), var(--color-ink) 55%);
+  --color-wooddeep: color-mix(in srgb, var(--color-wood), var(--color-ink) 50%);
+}
+
+/* Desktop UI scale: steps down for small or short windows, up for large ones. */
+@custom-variant short (@media (width >= 48rem) and (max-height: 820px));
+@custom-variant tiny (@media (width >= 48rem) and (max-height: 540px));
+/* Short and wide: the art scales by width, so signposts ride higher on screen. */
+@custom-variant shortwide (@media (width >= 48rem) and (max-height: 900px) and (min-aspect-ratio: 17 / 10));
+
+@utility ui-zoom {
+  zoom: var(--ui);
+}
+
+:root {
+  --ui: 1;
+}
+@media (width >= 48rem) and ((width <= 1280px) or (height <= 820px)) {
+  :root {
+    --ui: 0.9;
   }
+}
+@media (width >= 48rem) and ((width <= 1100px) or (height <= 720px)) {
+  :root {
+    --ui: 0.8;
+  }
+}
+/* Wide windows scale the art by width, lifting the signposts: shrink the UI more. */
+@media (width >= 48rem) and (height <= 900px) and (min-aspect-ratio: 17 / 10) {
+  :root {
+    --ui: 0.8;
+  }
+}
+@media (width >= 48rem) and ((width <= 960px) or (height <= 620px)) {
+  :root {
+    --ui: 0.7;
+  }
+}
+@media (width >= 48rem) and ((height <= 540px) or ((height <= 620px) and (min-aspect-ratio: 19 / 10))) {
+  :root {
+    --ui: 0.62;
+  }
+}
+@media (width >= 1760px) and (height >= 1080px) {
+  :root {
+    --ui: 1.15;
+  }
+}
+@media (width >= 2200px) and (height >= 1300px) {
+  :root {
+    --ui: 1.3;
+  }
+}
+
+@layer base {
+  body {
+    background: #2a4a6a;
+    font-family: var(--font-hand);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+}
+
+/* Paper surfaces: texture + rough edge live on ::before so content stays crisp. */
+@layer components {
+  .pp-h {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .pp-card,
+  .pp-hud,
+  .pp-inset,
+  .pp-tile,
+  .pp-chip,
+  .pp-plank,
+  .pp-badge,
+  .pp-bar,
+  .pp-btn {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .pp-card::before,
+  .pp-hud::before,
+  .pp-inset::before,
+  .pp-tile::before,
+  .pp-chip::before,
+  .pp-plank::before,
+  .pp-badge::before,
+  .pp-bar::before,
+  .pp-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: url('./assets/paper-texture.svg');
+    background-size: 360px 360px;
+    filter: url(#pp-rough-sm);
+  }
+
+  .pp-card::before {
+    background-color: var(--color-paper);
+    box-shadow:
+      0 7px 0 var(--color-edge),
+      0 18px 34px rgb(40 22 10 / 0.28);
+    filter: url(#pp-rough);
+  }
+  .pp-hud::before {
+    background-color: var(--color-paper);
+    box-shadow:
+      0 5px 0 var(--color-edge),
+      0 10px 20px rgb(40 22 10 / 0.2);
+    filter: url(#pp-rough);
+  }
+  .pp-inset::before,
+  .pp-chip::before {
+    background-color: var(--color-paperalt);
+  }
+  .pp-tile::before {
+    background-color: var(--color-paperalt);
+    border: 4px solid var(--color-wooddeep);
+  }
+  .pp-plank::before {
+    background-color: var(--color-wood);
+    border: 3px solid var(--color-wooddeep);
+    box-shadow: 0 5px 0 var(--color-wooddeep);
+  }
+  .pp-badge::before {
+    background-color: var(--color-accent);
+    box-shadow: 0 3px 0 var(--color-accentdeep);
+  }
+  .pp-bar::before {
+    background-color: var(--b);
+  }
+
+  .pp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 10px 24px;
+    border-radius: 18px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .pp-btn::before {
+    background-color: var(--b);
+    box-shadow: 0 6px 0 var(--bd);
+  }
+  .pp-btn:hover::before {
+    transform: translateY(2px);
+    box-shadow: 0 4px 0 var(--bd);
+  }
+  .pp-btn:active::before {
+    transform: translateY(5px);
+    box-shadow: 0 1px 0 var(--bd);
+  }
+
+  /* Nav link: a button whose fill only shows on hover, focus or the current page. */
+  .pp-nav-link::before {
+    opacity: 0;
+    transition: opacity 120ms ease;
+  }
+  .pp-nav-link:is(
+      :hover,
+      :focus-visible,
+      :active,
+      [aria-current='page']
+    )::before {
+    opacity: 1;
+  }
+  /* The highlight moves: the current page gives it up while another link is hovered. */
+  :has(> .pp-nav-link:hover)
+    > .pp-nav-link[aria-current='page']:not(:hover)::before {
+    opacity: 0;
+  }
+
+  .b-primary {
+    --b: var(--color-primary);
+    --bd: var(--color-primarydeep);
+  }
+  .b-accent {
+    --b: var(--color-accent);
+    --bd: var(--color-accentdeep);
+  }
+  .b-success {
+    --b: var(--color-success);
+    --bd: var(--color-successdeep);
+  }
+  .b-info {
+    --b: var(--color-info);
+    --bd: var(--color-infodeep);
+  }
+  .b-paper {
+    --b: var(--color-paperalt);
+    --bd: var(--color-edge);
+  }
+  .b-ink {
+    --b: var(--color-ink);
+    --bd: var(--color-ink);
+  }
+
+  .pp-field {
+    width: 100%;
+    padding: 10px 14px;
+    border: 0;
+    background: transparent;
+    font-size: 21px;
+    color: var(--color-ink);
+    outline: none;
+  }
+  .pp-field::placeholder {
+    color: var(--color-inksoft);
+  }
+  .pp-inset:has(.pp-field:focus-visible) {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-btn:is(:hover, :active)::before {
+    transform: none;
+  }
+  .pp-nav-link::before {
+    transition: none;
+  }
+}
+
+/*
+ * Painted town behind every page. Mobile: the tall art, cover-fitted.
+ * Desktop: a 16:10 stage that cover-fits the viewport, so map signposts
+ * placed in % stay on the painted paths. Each area zooms/blurs its own crop.
+ */
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.scene-art {
+  position: absolute;
+  inset: 0;
+  background: url('./assets/town-mobile.svg') center top / cover no-repeat;
+  transform: scale(var(--ms, 1));
+  transform-origin: var(--mo, 50% 50%);
+  filter: var(--mf, none);
+}
+.scene-stage {
+  display: none;
+}
+@media (width >= 48rem) {
+  .scene-art,
+  .scene-stage {
+    inset: auto;
+    left: 50%;
+    top: 50%;
+    width: max(100%, 160dvh);
+    aspect-ratio: 16 / 10;
+    translate: -50% -50%;
+  }
+  .scene-art {
+    background-image: url('./assets/town-desktop.svg');
+    background-size: 100% 100%;
+    transform: scale(var(--s, 1));
+    transform-origin: var(--o, 50% 50%);
+    filter: var(--f, none);
+  }
+  .scene-stage {
+    position: absolute;
+  }
+}
+/* Signposts only fit a landscape crop; portrait windows get the tile picker. */
+@media (width >= 48rem) and (orientation: landscape) {
+  .scene-stage {
+    display: block;
+  }
+}
+/*
+ * The map keeps its signpost band in view: anchored to the bottom so short
+ * windows lose sky, and focused ~70% across where the signposts stand.
+ */
+@media (width >= 48rem) {
+  .scene[data-area='map'] :is(.scene-art, .scene-stage) {
+    --stage-w: max(100%, 160dvh);
+    top: auto;
+    bottom: 0;
+    left: calc((100% - var(--stage-w)) * 0.7);
+    width: var(--stage-w);
+    translate: none;
+  }
+}
+.scene[data-area='about'] {
+  --s: 1.08;
+  --f: blur(5px) brightness(0.9) saturate(0.9);
+  --ms: 1.31;
+  --mo: 50% 127%;
+}
+.scene[data-area='skills'] {
+  --s: 1.8;
+  --o: 60% 72%;
+  --f: blur(5px) brightness(0.9) saturate(0.9);
+  --ms: 2.56;
+  --mo: 102% 80%;
+}
+.scene[data-area='projects'] {
+  --s: 2.08;
+  --o: 96% 78%;
+  --f: blur(5px) brightness(0.9) saturate(0.9);
+  --ms: 1.51;
+  --mo: 50% 129%;
+}
+.scene[data-area='contact'] {
+  --s: 1.02;
+  --f: blur(3px);
+  --ms: 1.02;
+  --mf: blur(2px);
+}
+/* Sunset tint; blended here since blending inside the blurred art is ignored. */
+.scene[data-area='contact']::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(120 70 150 / 0.75) 0%,
+    rgb(255 140 80 / 0.6) 45%,
+    rgb(255 190 110 / 0.35) 62%,
+    rgb(90 50 70 / 0.55) 100%
+  );
+  mix-blend-mode: multiply;
 }
